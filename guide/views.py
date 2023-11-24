@@ -4,6 +4,13 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import CustomUserCreationForm, ItineraryForm, ReviewForm
 from .models import CustomUser, Itinerary, Review
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+
+
+def home_view(request):
+    return render(request, 'guide/home.html')
+
 
 # User Registration View
 def register_view(request):

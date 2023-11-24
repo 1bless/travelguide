@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Dashboard</h2>
+    <p>Welcome, {{ request.user.username }}!</p>
+    <h3>Your Itineraries</h3>
+    {% for itinerary in itineraries %}
+        <p><a href="{% url 'itinerary_detail' pk=itinerary.pk %}">{{ itinerary.title }}</a></p>
+    {% empty %}
+        <p>You have no itineraries.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ itinerary.title }}</h2>
+    <p><strong>Destination:</strong> {{ itinerary.destination }}</p>
+    <p><strong>Dates:</strong> {{ itinerary.start_date }} to {{ itinerary.end_date }}</p>
+    <p><strong>Notes:</strong> {{ itinerary.notes }}</p>
+    <!-- Additional itinerary details here -->
+</div>
+{% endblock %}

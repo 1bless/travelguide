@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- This line is required to use the static tag -->
+
+{% block title %}Home | MyTravelGuide{% endblock title %}
+
+{% block extra_css %}
+<!-- Add any page-specific CSS here if needed -->
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section" style="background-image: url('{% static 'images/header.jpg' %}');">
+    <div class="container h-100 d-flex align-items-center justify-content-center text-center">
+        <div class="text-white">
+            <h1 class="display-3 font-weight-bold">Explore the World with Us</h1>
+            <p class="lead my-4">Join our community and start your next adventure.</p>
+            <a href="{% url 'register' %}" class="btn btn-lg btn-primary mr-2">Register</a>
+            <a href="{% url 'login' %}" class="btn btn-lg btn-secondary">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2>Welcome to MyTravelGuide</h2>
+            <p class="lead">Discover new destinations, create itineraries, and share your travel experiences.</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="feature-card card">
+                <div class="card-body">
+                    <h5 class="card-title">Personalized Itineraries</h5>
+                    <p class="card-text">Create travel plans tailored to your interests and preferences.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="feature-card card">
+                <div class="card-body">
+                    <h5 class="card-title">Reviews and Ratings</h5>
+                    <p class="card-text">Read insights from fellow travelers to find your perfect destination.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="feature-card card">
+                <div class="card-body">
+                    <h5 class="card-title">Community Recommendations</h5>
+                    <p class="card-text">Get advice from the community to enhance your travel experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_scripts %}
+<!-- Add any page-specific JavaScript here if needed -->
+{% endblock extra_scripts %}

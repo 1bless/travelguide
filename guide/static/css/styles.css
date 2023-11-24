@@ -1,0 +1,71 @@
+/* Typography */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Layout */
+.container {
+    max-width: 1140px;
+}
+
+/* Navbar */
+.navbar {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Footer */
+.footer {
+    background: #f8f9fa;
+    padding: 20px 0;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: #007bff; /* Example primary color */
+}
+
+.bg-primary {
+    background-color: #007bff; /* Example primary background color */
+    background-repeat: no-repeat;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    /* Responsive styles */
+}
+
+.bg-image-full {
+background-repeat: no-repeat;
+background-size: cover;
+
+
+}
+
+.hero-section {
+    height: 25vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration:underline;
+    color: rgb(206, 199, 199);
+}
+
+.hero-content > h1 {
+    animation: slideInLeft 1s ease-out;
+}
+
+.hero-section {
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
