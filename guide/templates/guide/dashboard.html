@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
-<div class="container">
-    <h2>Dashboard</h2>
-    <p>Welcome, {{ request.user.username }}!</p>
-    <h3>Your Itineraries</h3>
+  <h2>Your Itineraries</h2>
+  <a href="{% url 'itinerary_create' %}">Create New Itinerary</a>
+  <ul>
     {% for itinerary in itineraries %}
-        <p><a href="{% url 'itinerary_detail' pk=itinerary.pk %}">{{ itinerary.title }}</a></p>
-    {% empty %}
-        <p>You have no itineraries.</p>
+      <li>
+        <a href="{% url 'itinerary_detail' itinerary.pk %}">{{ itinerary.title }}</a>
+      </li>
     {% endfor %}
-</div>
+  </ul>
 {% endblock %}

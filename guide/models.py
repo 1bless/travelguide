@@ -6,11 +6,15 @@ from django.utils.translation import gettext_lazy as _
 from datetime import timedelta
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-# Custom User Model
 class CustomUser(AbstractUser):
     bio = models.TextField(_("Biography"), blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     interests = models.ManyToManyField('Interest', related_name='interested_users', blank=True)
+    location = models.CharField(_("Location"), max_length=100, blank=True)
+    
+    def update_statistics(self):
+        self.total_reviews = self.reviews.count()
+        self.save()
 
     def __str__(self):
         return self.username
@@ -23,7 +27,7 @@ class CustomUser(AbstractUser):
         # Custom method to update user statistics
         pass
 
-# Interest Model
+
 class Interest(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True)
@@ -31,7 +35,6 @@ class Interest(models.Model):
     def __str__(self):
         return self.name
 
-# Itinerary Model
 class Itinerary(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='itineraries')
     title = models.CharField(max_length=200)
@@ -45,12 +48,11 @@ class Itinerary(models.Model):
         return self.title
 
     def duration(self):
-        # Calculate the duration of the trip
         if self.start_date and self.end_date:
             return (self.end_date - self.start_date).days + 1
         return 0
 
-# Place Model
+
 class Place(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -60,7 +62,7 @@ class Place(models.Model):
     def __str__(self):
         return self.name
 
-# Review Model
+
 class Review(models.Model):
     itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='reviews')
@@ -71,12 +73,12 @@ class Review(models.Model):
     def __str__(self):
         return f'Review by {self.user.username} on {self.itinerary.title}'
 
-# Signals for Review model
+
 @receiver(post_save, sender=Review)
 def update_user_statistics_on_review_save(sender, instance, created, **kwargs):
     if created:
-        instance.user.update_statistics()  # Update statistics on review creation
+        instance.user.update_statistics()
 
 @receiver(post_delete, sender=Review)
 def update_user_statistics_on_review_delete(sender, instance, **kwargs):
-    instance.user.update_statistics()  # Update statistics on review deletion
+    instance.user.update_statistics()

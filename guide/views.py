@@ -11,8 +11,19 @@ from django.shortcuts import render
 def home_view(request):
     return render(request, 'guide/home.html')
 
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard_view')
+    else:
+        form = CustomUserCreationForm(instance=request.user)
+    return render(request, 'guide/profile.html', {'form': form})
 
-# User Registration View
+
+
 def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST, request.FILES)
@@ -24,7 +35,7 @@ def register_view(request):
         form = CustomUserCreationForm()
     return render(request, 'guide/register.html', {'form': form})
 
-# User Login View
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -36,18 +47,21 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'guide/login.html', {'form': form})
 
-# User Logout View
+
 def logout_view(request):
     logout(request)
     return redirect('login_view')
 
-# User Dashboard View
+
 @login_required
 def dashboard_view(request):
     user_itineraries = Itinerary.objects.filter(user=request.user)
-    return render(request, 'guide/dashboard.html', {'itineraries': user_itineraries})
+    context = {
+        'itineraries': user_itineraries,
+        'total_itineraries': user_itineraries.count(),
+    }
+    return render(request, 'guide/dashboard.html', context)
 
-# Itinerary Creation View
 @login_required
 def itinerary_create_view(request):
     if request.method == 'POST':
@@ -62,13 +76,13 @@ def itinerary_create_view(request):
         form = ItineraryForm()
     return render(request, 'guide/itinerary_form.html', {'form': form})
 
-# Itinerary Detail View
+
 @login_required
 def itinerary_detail_view(request, pk):
     itinerary = get_object_or_404(Itinerary, pk=pk, user=request.user)
     return render(request, 'guide/itinerary_detail.html', {'itinerary': itinerary})
 
-# Review Submission View
+
 @login_required
 def review_submit_view(request, itinerary_pk):
     itinerary = get_object_or_404(Itinerary, pk=itinerary_pk)

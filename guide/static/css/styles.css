@@ -1,71 +1,205 @@
-/* Typography */
+/* Reset and Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    margin: 0;
+}
+
+.full-site-background {
+    background-image: url('images/header.jpg'); /* Update with the correct path */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Optional: this makes the background fixed during scroll */
+    height: 100%;
+}
+
+/* Add this if you want a dark overlay */
+.full-site-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* Or any other color and transparency */
+    z-index: -1;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    background: #f4f4f4;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
 }
 
 /* Layout */
 .container {
-    max-width: 1140px;
+    max-width: auto;
+    margin: 0px;
+    padding: 0 15px;
 }
 
 /* Navbar */
 .navbar {
     background: #fff;
+    padding: 2px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    transition: padding 0.3s;
 }
+
+/* Sticky Navbar on Scroll */
+window.onscroll = function() {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.querySelector('.navbar').style.padding = "10px 0";
+    } else {
+        document.querySelector('.navbar').style.padding = "15px 0";
+    }
+};
 
 /* Footer */
 .footer {
-    background: #f8f9fa;
-    padding: 20px 0;
-    font-size: 0.875rem;
+    background: #333;
+    color: #f4f4f4;
+    padding: 40px 0;
+    font-size: 0.5rem;
     text-align: center;
+}
+
+.footer p {
+    margin-bottom: -2;
 }
 
 /* Utility Classes */
 .text-primary {
-    color: #007bff; /* Example primary color */
+    color: #ffffff; /* Vibrant primary color */
 }
 
 .bg-primary {
-    background-color: #007bff; /* Example primary background color */
-    background-repeat: no-repeat;
+    background-image: linear-gradient(to right, #a1a1a1, rgb(72, 72, 72)); /* Gradient primary background */
+    color: #fff;
+    padding: 0.5rem;
+    transition: background 0.3s;
+}
+
+.bg-primary:hover {
+    background-image: linear-gradient(to left, #a2a2a2, #565657);
 }
 
 /* Responsiveness */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px 0;
+    }
+}
+
 @media (max-width: 768px) {
     /* Responsive styles */
+    .navbar {
+        text-align: center;
+    }
 }
 
+/* Full Background Images */
 .bg-image-full {
-background-repeat: no-repeat;
-background-size: cover;
-
-
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
 
-.hero-section {
-    height: 25vh;
+/* Hero Section */
+.hero {
+    height: 85vh;
+    /*background-image: url('path-to-your-hero-image.jpg');*/
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    text-decoration:underline;
-    color: rgb(206, 199, 199);
+    color: #fff;
+    position: relative;
+    text-decoration: none;
+}
+
+.hero:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+ /* Dark overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
 }
 
 .hero-content > h1 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
     animation: slideInLeft 1s ease-out;
 }
 
-.hero-section {
-    background-size:cover;
-    background-position: center;
-    background-repeat: no-repeat;
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3c3e3f;
+    color: #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease-out;
 }
+
+.btn:hover {
+    background: #000000;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Initiate Animations on Scroll */
+window.addEventListener('scroll', reveal);
+
+function reveal() {
+    var reveals = document.querySelectorAll('.reveal');
+
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().

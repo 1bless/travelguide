@@ -2,38 +2,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="A professional travel guide website to explore new destinations.">
-    
-    <!-- CSRF Token -->
-    {% csrf_token %}
-    
-    <!-- Title -->
-    <title>{% block title %}MyTravelGuide{% endblock %}</title>
-    
-    <!-- Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}MyTravelGuide{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    
-    {% block extrahead %}{% endblock %}
+    {% block extra_css %}
+    {% endblock extra_css %}
 </head>
-<body>
-    {% include 'guide/partials/navbar.html' %}
+<body calss = "bg-main">
+    <div class="full-site-background" style="background-image: url('{% static 'images/header.jpg' %}');">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand text-primary" href="{% url 'home' %}">MyTravelGuide</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-primary" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-    {% block content %}{% endblock %}
+        <main role="main" class="container py-4">
+            {% block content %}
+            {% endblock content %}
+        </main>
 
-    {% include 'guide/partials/footer.html' %}
-    
-    <!-- Bootstrap Bundle with Popper -->
+        <footer class="footer bg-primary">
+            <div class="container text-center">
+                <span class="text-white">© 2023 MyTravelGuide, Inc. All rights reserved.</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    
-    <!-- Custom Scripts -->
-    {% block scripts %}{% endblock %}
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
 </body>
 </html>
