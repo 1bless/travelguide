@@ -1,6 +1,5 @@
-
 {% extends 'base.html' %}
-{% load static %}  <!-- This line is required to use the static tag -->
+{% load static %}
 
 {% block title %}Home | MyTravelGuide{% endblock title %}
 
@@ -10,13 +9,13 @@
     <div class="hero-content">
         <h1 class="display-3 font-weight-bold text-white">Explore the World with Us</h1>
         <p class="lead my-4 text-white">Join our community and start your next adventure.</p>
-        <a href="{% url 'register' %}" class="btn btn-lg btn-primary mr-2">Register</a>
+        <a href="{% url 'register' %}" class="btn btn-lg">Register</a>
         <a href="{% url 'login' %}" class="btn btn-lg btn-secondary">Login</a>
     </div>
 </div>
 
 <!-- Features Section -->
-<div class="container py-5">
+<div class="section fp-auto-height">
     <div class="row">
         <div class="col-12 text-center">
             <h2>Welcome to MyTravelGuide</h2>

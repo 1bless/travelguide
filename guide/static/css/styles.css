@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body, html {
     margin: 0;
 }
@@ -52,21 +53,37 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar */
 .navbar {
-    background: #fff;
-    padding: 2px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    background: transparent; /* Make navbar transparent */
+    padding: 10px 0;
+    box-shadow: none; /* Remove box shadow for transparent effect */
     position: fixed;
     width: 100%;
     z-index: 1000;
-    transition: padding 0.3s;
+    transition: all 0.3s ease-out;
 }
 
-/* Sticky Navbar on Scroll */
+.navbar a {
+    color: #fff; /* Set navbar link color */
+    transition: color 0.3s ease-out;
+}
+
+/* Change navbar style on scroll */
 window.onscroll = function() {
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.querySelector('.navbar').style.padding = "10px 0";
+    var nav = document.querySelector('.navbar');
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        nav.style.background = "#fff"; /* Opaque background */
+        nav.style.boxShadow = "0 2px 4px rgba(0,0,0,.1)";
+        var navLinks = nav.querySelectorAll('a');
+        for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].style.color = "#333"; /* Dark color for links */
+        }
     } else {
-        document.querySelector('.navbar').style.padding = "15px 0";
+        nav.style.background = "transparent";
+        nav.style.boxShadow = "none";
+        var navLinks = nav.querySelectorAll('a');
+        for (var i = 0; i < navLinks.length; i++) {
+            navLinks[i].style.color = "#fff"; /* Light color for links */
+        }
     }
 };
 
@@ -107,7 +124,6 @@ window.onscroll = function() {
 }
 
 @media (max-width: 768px) {
-    /* Responsive styles */
     .navbar {
         text-align: center;
     }
@@ -123,7 +139,6 @@ window.onscroll = function() {
 /* Hero Section */
 .hero {
     height: 85vh;
-    /*background-image: url('path-to-your-hero-image.jpg');*/
     background-size: cover;
     background-position: center;
     display: flex;
@@ -142,7 +157,7 @@ window.onscroll = function() {
     left: 0;
     right: 0;
     bottom: 0;
- /* Dark overlay */
+    /* Dark overlay */
 }
 
 .hero-content {
@@ -202,4 +217,13 @@ function reveal() {
 
     for (var i = 0; i < reveals.length; i++) {
         var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } else {
+            reveals[i].classList.remove("active");
+        }
+    }
+}
